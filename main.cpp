@@ -29,14 +29,18 @@ int main(int argc, char** argv) {
     int loops = 0;
     int loopsMax = 0;
     int loopTime = 0;
-    argv[3] ? loopsMax = std::stoi(argv[3]) : loopsMax = 100;
-    argv[4] ? loopTime = std::stoi(argv[4]) * 100 : loopTime = 100000;
+    argc >= 3 ? loopsMax = std::stoi(argv[3]) : loopsMax = 100;
+    argc >= 4 ? loopTime = std::stoi(argv[4]) * 100 : loopTime = 100000;
     //----------------------------------------------------------------------------//
     while (stopLoop == 0){
         //----------------------------------------------------------------------------//
         // Split by line into array
         std::string openWindows = GetStdoutFromCommand("wmctrl -l");
         std::string program = argv[1];
+
+        boost::algorithm::to_lower(openWindows);
+        boost::algorithm::to_lower(program);
+
         std::string minimize;
         std::vector<std::string> strs;
         boost::split(strs,openWindows,boost::is_any_of("\n"));
