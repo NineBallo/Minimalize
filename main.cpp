@@ -11,15 +11,16 @@ int main(int argc, char** argv) {
 
     //----------------------------------------------------------------------------//
     //If command is passed as value use that, then run it.
-    std::string command;
+    std::string command = argv[1];
     if (argv[2]){
         command = argv[2];
-        command + " &";
+        command += " &";
     } else{
         command = argv[1];
-        command + " &";
+        command += " &";
     }
-    system("spotify &");
+
+    system(command.c_str());
     //----------------------------------------------------------------------------//
 
 
@@ -29,8 +30,9 @@ int main(int argc, char** argv) {
     int loops = 0;
     int loopsMax = 0;
     int loopTime = 0;
-    argc >= 3 ? loopsMax = std::stoi(argv[3]) : loopsMax = 100;
-    argc >= 4 ? loopTime = std::stoi(argv[4]) * 100 : loopTime = 100000;
+
+    argc >= 4 ? loopsMax = std::stoi(argv[3]) : loopsMax = 100;
+    argc >= 5 ? loopTime = std::stoi(argv[4]) * 100 : loopTime = 100000;
     //----------------------------------------------------------------------------//
     while (stopLoop == 0){
         //----------------------------------------------------------------------------//
@@ -66,12 +68,6 @@ int main(int argc, char** argv) {
                     stopLoop = 1;
                     //----------------------------------------------------------------------------//
                 }
-                else {
-                std::cout << "Match not found\n";
-                }
-            }
-            else {
-                std::cout << "Match not found\n";
             }
         }
         //----------------------------------------------------------------------------//
@@ -83,7 +79,6 @@ int main(int argc, char** argv) {
             std::cout << "Window not found, loops compleated: " << loops;
             stopLoop = 1;
         }
-
         loops++;
         usleep(loopTime);
         //----------------------------------------------------------------------------//
